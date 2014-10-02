@@ -147,7 +147,7 @@ else
     echo "If you know the dependencies are installed, you can use -D (or"
     echo "--no-dependencies to skip this."
     echo " "
-    sudo yum -y install rpm-build wget $(echo "$build_dependencies" | sed 's/, / /g')
+    sudo yum -y install rpm-build scl-utils scl-utils-build wget $(echo "$build_dependencies" | sed 's/, / /g')
     echo " "
 fi
 echo " "
@@ -177,7 +177,7 @@ echo "--------"
 echo " "
 if [ -n "$MOCK_ENVIRONMENT" ]; then
     echo "Running rpmbuild to generate the SRPM."
-    rpmbuild -bs "${rootdir}/${SPEC}"
+    rpmbuild -bs "${rootdir}/${SPEC}" --define "scl python27"
 
     echo "Running mock to generate the RPM. Whilst the build is in progress,"
     echo "watch ${rootdir}/MOCK/*.log for status information."
@@ -191,6 +191,6 @@ if [ -n "$MOCK_ENVIRONMENT" ]; then
 else
     echo "Running rpmbuild to generate the SRPM and RPM."
     echo " "
-    rpmbuild --define "_topdir ${rootdir}" -ba "${rootdir}/${SPEC}"
+    rpmbuild --define "_topdir ${rootdir}" -ba "${rootdir}/${SPEC}" --define "scl python27"
     echo " "
 fi
