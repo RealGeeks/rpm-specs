@@ -1,0 +1,9 @@
+# Temporary files used by rpmbuild
+/BUILD/
+/BUILDROOT/
+/RPMS/
+/SOURCES/
+/SRPMS/
+
+# Temporary files used by mock
+/MOCK/
